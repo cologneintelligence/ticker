@@ -1,7 +1,13 @@
+[![Build Status](https://travis-ci.org/kia/ticker.svg?branch=master)](https://travis-ci.org/kia/ticker)
+
+[![Code Climate](https://codeclimate.com/github/kia/ticker.png)](https://codeclimate.com/github/kia/ticker)
+
 ticker
 ======
 
 A ticker software by clojure and MongDB
+inspired by http://www.luminusweb.net/
+see http://www.luminusweb.net/docs#guestbook_application
 
 ## Prerequisites
 
