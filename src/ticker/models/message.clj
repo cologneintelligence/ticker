@@ -30,8 +30,8 @@
 
 
 (defn save [username message]
-  (let [conn (mg/connect)  db (mg/get-db conn "ticker")]
-    (mc/insert db "message"
+    (mc/insert @mongo-db "message"
                {:username username
                 :message message
-                :timestamp (new java.util.Date)})))
+                :timestamp (new java.util.Date)})
+  (str "adasdasdasd"))

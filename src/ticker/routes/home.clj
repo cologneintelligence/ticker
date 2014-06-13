@@ -8,4 +8,7 @@
 
 (defroutes home-routes
   (GET "/" [] (home))
-  (POST "/" [username message] (str "Speicher " username message)))
+  (POST "/" [username message] (do
+                                 (message/save username message)
+                                 (str "test")
+                                 )))
