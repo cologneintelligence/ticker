@@ -12,16 +12,26 @@
 
 (def connected (ref false))
 
+(def mongo-db (ref false))
+
 (defn init-mongo []
-  (do
-    (mg/connect-via-uri! (mongo-uri))
+  (let [{:keys [conn db]} (mg/connect-via-uri (mongo-uri))]
     (dosync
-     (ref-set connected true))))
+      (ref-set connected true)
+      (ref-set mongo-db db))))
 
 (defn messages []
   (if-not (= @connected true)
     (init-mongo))
-  (q/with-collection "message"
+  (q/with-collection @mongo-db "message"
     (q/skip 0)
     (q/limit 10)
     (q/sort (sorted-map :timestamp -1))))
+
+
+(defn save [username message]
+  (let [conn (mg/connect)  db (mg/get-db conn "ticker")]
+    (mc/insert db "message"
+               {:username username
+                :message message
+                :timestamp (new java.util.Date)})))
