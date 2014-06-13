@@ -10,17 +10,18 @@
     [:body body]))
 
 (defn content [messages]
-  [:div.content
-   (for [{:keys [username message]} messages]
-     [:div
-      [:h2 message]
-      [:p username]])]
-  (form-to [:post "/"]
-     [:p "Name:"]
-     (text-field "username" "Benutzername goes here")
+  [:div.main
+    [:div.content
+     (for [{:keys [username message]} messages]
+       [:div
+        [:h2 message]
+        [:p username]])]
+    (form-to [:post "/"]
+       [:p "Name:"]
+       (text-field "username" "Benutzername goes here")
 
-     [:p "Message:"]
-     (text-area {:rows 10 :cols 40} "message" "Message goes here")
+       [:p "Message:"]
+       (text-area {:rows 10 :cols 40} "message" "Message goes here")
 
-     [:br]
-     (submit-button "comment")))
+       [:br]
+       (submit-button "comment"))])
