@@ -7,4 +7,5 @@
   (layout/common (layout/content (message/messages))))
 
 (defroutes home-routes
-  (GET "/" [] (home)))
+  (GET "/" [] (home))
+  (POST "/" [username message] (str "Speicher " username message)))
