@@ -33,5 +33,4 @@
     (mc/insert @mongo-db "message"
                {:username username
                 :message message
-                :timestamp (new java.util.Date)})
-  (str "adasdasdasd"))
+                :timestamp (new java.util.Date)}))
