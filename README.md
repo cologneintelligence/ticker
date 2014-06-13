@@ -1,9 +1,6 @@
 # ticker
 [![Build Status](https://travis-ci.org/cologneintelligence/ticker.svg?branch=master)](https://travis-ci.org/cologneintelligence/ticker)
 
-[![Code Climate](https://codeclimate.com/github/kia/ticker.png)](https://codecli
-mate.com/github/kia/ticker)
-
 ticker
 ======
 
