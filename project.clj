@@ -7,6 +7,7 @@
                  [ring-server "0.3.1"]
                  [com.novemberain/monger "2.0.0-rc1"]]
   :plugins [[lein-ring "0.8.10"]]
+  :min-lein-version "2.2.0"
   :ring {:handler ticker.handler/app
          :init ticker.handler/init
          :destroy ticker.handler/destroy}
