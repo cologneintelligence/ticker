@@ -9,7 +9,7 @@
 
 (defroutes home-routes
   (GET "/" [] (home))
-  (POST "/" [username message] (do
-                                 (message/save username message)
-                                 (resp/redirect "/")
-                                 )))
+  (POST "/" [username message]
+        (do
+          (message/save username message)
+          (resp/redirect "/"))))
