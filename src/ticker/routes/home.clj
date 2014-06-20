@@ -4,11 +4,14 @@
             [ticker.models.message :as message]
             [ring.util.response :as resp]))
 
-(defn home []
-  (layout/common (layout/content (message/messages))))
+(defn home
+  ([page] (layout/common (layout/content (message/messages (* 10 page) (* (+ 1 page) 10)) page)))
+  ([]  (layout/common (layout/content (message/messages 0 10) 0))))
+
 
 (defroutes home-routes
   (GET "/" [] (home))
+  (GET "/:page" [page] (home (read-string page)))
   (POST "/" [username message]
         (do
           (message/save username message)

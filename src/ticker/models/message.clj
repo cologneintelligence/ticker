@@ -20,12 +20,12 @@
       (ref-set connected true)
       (ref-set mongo-db db))))
 
-(defn messages []
+(defn messages [skip limit]
   (if-not (= @connected true)
     (init-mongo))
   (q/with-collection @mongo-db "message"
-    (q/skip 0)
-    (q/limit 10)
+    (q/skip skip)
+    (q/limit limit)
     (q/sort (sorted-map :timestamp -1))))
 
 
