@@ -1,7 +1,9 @@
 (ns ticker.models.message
   (:require [monger.core :as mg]
             [monger.collection :as mc]
-            [monger.query :as q]))
+            [monger.query :as q]
+            [monger.command :as cmd]
+            [monger.conversion :refer [from-db-object]]))
 
 
 (defn mongo-uri []
@@ -28,6 +30,8 @@
     (q/limit limit)
     (q/sort (sorted-map :timestamp -1))))
 
+(defn size []
+  (:count (from-db-object (cmd/collection-stats @mongo-db "message") true)))
 
 (defn save [username message]
     (mc/insert @mongo-db "message"

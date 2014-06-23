@@ -5,8 +5,10 @@
             [ring.util.response :as resp]))
 
 (defn home
-  ([page] (layout/common (layout/content (message/messages (* 10 page) (* (+ 1 page) 10)) page)))
-  ([]  (layout/common (layout/content (message/messages 0 10) 0))))
+  ([page]
+     (println (str "size: " (message/size)))
+     (layout/common (layout/content (message/messages (* 10 page) (* (+ 1 page) 10)) page (message/size))))
+  ([]  (layout/common (layout/content (message/messages 0 10) 0 (message/size)))))
 
 
 (defroutes home-routes
