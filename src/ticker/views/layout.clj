@@ -29,7 +29,7 @@
   (defn content [messages page docsize]
     [:div.main {:class "large-4 row"}
      [:div [:h1 "Ticker"]
-      [:h4 {:class "subheader"} "hast du was, was du den anderen mitteilen willst, dann lass es die anderen wissen!"]
+      [:h4 {:class "subheader"} "simple message ticker"]
       ]
      [:div {:class "panel callout"}
      (form-to [:post "/"]
