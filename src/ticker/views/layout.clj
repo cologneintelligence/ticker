@@ -40,10 +40,10 @@
               (submit-button {:class "button"} "comment"))]
      [:div.content
       (navi page docsize)
-      (for [{:keys [username message]} messages]
+      (for [{:keys [username message timestamp]} messages]
         [:div {:class "panel"}
          [:h3 (formatter/format-link message)]
-         [:p username]])
+         [:p (str (.format (java.text.SimpleDateFormat. "dd.MM.yyyy HH:mm") timestamp) " | " username  )] ])
       (navi page docsize)
       [:br]
       [:br]]])
