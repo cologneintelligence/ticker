@@ -43,7 +43,7 @@
       (for [{:keys [username message timestamp]} messages]
         [:div {:class "panel"}
          [:h3 (formatter/format-link message)]
-         [:p (str (.format (java.text.SimpleDateFormat. "dd.MM.yyyy HH:mm") timestamp) " | " username  )] ])
+         [:p (str (.format (java.text.SimpleDateFormat. "dd.MM.yyyy HH:mm") timestamp) " ★ " username  )] ])
       (navi page docsize)
       [:br]
       [:br]]])
