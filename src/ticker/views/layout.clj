@@ -15,32 +15,34 @@
 (defn navi [page docsize]
   (let [pagesize 10 actcount (* page pagesize)]
     (if (> docsize pagesize)
-      [:div
+      [:ul {:class "pagination"}
        (if (> page 0)
-         (link-to (str (if (> page 0 ) (- page 1))) "newer"))
-       (if (> page 0)
-         (str "&nbsp;&nbsp;&nbsp;"))
+         [:li (link-to (str (if (> page 0 ) (- page 1))) "newer")]
+         [:li {:class "unavailable"} (link-to "" "newer")]
+       )
        (if (> docsize (* (+ 1 page) 10))
-         (link-to (str (if (> docsize actcount) (+ page 1))) "older"))])))
+         [:li (link-to (str (if (> docsize actcount) (+ page 1))) "older")]
+         [:li {:class "unavailable"} (link-to "" "older")]         
+         )
+       ])))
 
   (defn content [messages page docsize]
-    [:div.main {:class "row"}
-     [:div [:h1 "ticker"]
-      [:h3 {:class "subheader"} "tick it out"]
-      [:hr]
+    [:div.main {:class "large-4 row"}
+     [:div [:h1 "Ticker"]
+      [:h4 {:class "subheader"} "hast du was, was du den anderen mitteilen lassen willst, dann lass es die anderen wissen!"]
       ]
+     [:div {:class "panel callout"}
      (form-to [:post "/"]
               [:label "Name"
                [:input {:placeholder "Username goes here" :type "text" :name "username"}]]
               [:label "Message"
                [:textarea {:placeholder "Message goes here" :name "message"}]]
-              [:br]
-              (submit-button {:class "small round button"} "comment"))
+              (submit-button {:class "button"} "comment"))]
      [:div.content
       (navi page docsize)
       (for [{:keys [username message]} messages]
         [:div {:class "panel"}
-         [:h2 (formatter/format-link message)]
+         [:h3 (formatter/format-link message)]
          [:p username]])
       (navi page docsize)
       [:br]
