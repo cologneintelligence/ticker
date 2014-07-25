@@ -1,5 +1,5 @@
 (ns ticker.views.layout
-  (:require [hiccup.page :refer [html5 include-css]]
+  (:require [hiccup.page :refer [html5 include-css include-js]]
             [hiccup.form :refer :all]
             [ticker.formatter :as formatter])
   (:use hiccup.element ))
@@ -8,7 +8,8 @@
   (html5
    [:head
     [:title "tick mal!"]
-    (include-css "/css/screen.css")]
+    (include-css "/css/foundation.css")
+    (include-js "/js/vendor/modernizr.js")]
    [:body body]))
 
 (defn navi [page docsize]
@@ -23,24 +24,24 @@
          (link-to (str (if (> docsize actcount) (+ page 1))) "older"))])))
 
   (defn content [messages page docsize]
-    [:div.main
-     [:div.title [:h1 "ticker"]]
+    [:div.main {:class "row"}
+     [:div [:h1 "ticker"]
+      [:h3 {:class "subheader"} "tick it out"]
+      [:hr]
+      ]
      (form-to [:post "/"]
-              [:p "Name:"]
-              (text-field "username" "Username goes here")
-
-              [:p "Message:"]
-              (text-area {:rows 4 :cols 40} "message" "Message goes here")
-
+              [:label "Name"
+               [:input {:placeholder "Username goes here" :type "text" :name "username"}]]
+              [:label "Message"
+               [:textarea {:placeholder "Message goes here" :name "message"}]]
               [:br]
-              (submit-button "comment"))
+              (submit-button {:class "small round button"} "comment"))
      [:div.content
       (navi page docsize)
       (for [{:keys [username message]} messages]
-        [:div
+        [:div {:class "panel"}
          [:h2 (formatter/format-link message)]
-         [:p username]
-         [:hr]])
+         [:p username]])
       (navi page docsize)
       [:br]
       [:br]]])
